@@ -9,6 +9,8 @@
 *   **Latency**: How fast is the system? (Time-to-first-token & total duration)
 *   **Cost**: What is the token usage and dollar cost per interaction?
 
+> **📘 Detailed Framework**: See our [Advanced Evaluation Framework](FRAMEWORK.md) for LLM-as-a-Judge metrics and RAG Triad scoring.
+
 ---
 
 ## Evaluation Reports
