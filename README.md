@@ -1,8 +1,10 @@
 # 🧠 AI Product Lab: 100 Days of Ship
 
+![AI Product Lab Banner](assets/banner.png)
+
 > **Transforming from Builder to Senior AI Product Owner.** This is an iterative, decision-driven laboratory for building, evaluating, and scaling AI-native systems.
 
-![AI Product Lab Banner](https://img.shields.io/badge/Status-Active-emerald?style=for-the-badge&logo=ai)
+![Status](https://img.shields.io/badge/Status-Active-emerald?style=for-the-badge&logo=ai)
 ![Projects](https://img.shields.io/badge/Projects-100-blue?style=for-the-badge)
 ![Role](https://img.shields.io/badge/Identity-AI%20PM%20+%20Builder-orange?style=for-the-badge)
 
