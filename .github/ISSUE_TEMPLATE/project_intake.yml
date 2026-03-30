@@ -1,0 +1,50 @@
+name: 🚀 New Project Intake
+description: Propose a new AI project for the lab.
+title: "[PROPOSAL]: "
+labels: ["project-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing a new project to the 100 Days of Ship lab!
+  - type: input
+    id: project-name
+    attributes:
+      label: Project Name
+      placeholder: e.g., semantic-search-optimizer
+    validations:
+      required: true
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Proposed Tier
+      options:
+        - Tier 1 (Flagship)
+        - Tier 2 (Strong Build)
+        - Tier 3 (Support/Experiment)
+    validations:
+      required: true
+  - type: textarea
+    id: problem-definition
+    attributes:
+      label: Problem Definition
+      description: What exact problem does this solve?
+      placeholder: Describe the pain point...
+    validations:
+      required: true
+  - type: textarea
+    id: ai-logic
+    attributes:
+      label: Why AI?
+      description: What is the core AI pattern (RAG, Agent, etc.)?
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Lab Readiness
+      options:
+        - label: I have checked the Project Matrix for duplicates.
+          required: true
+        - label: I have a clear evaluation strategy in mind.
+          required: true

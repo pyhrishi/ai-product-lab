@@ -1,0 +1,48 @@
+name: 🪲 AI System Bug Report
+description: Report a bug or hallucination.
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this to report technical failures or AI quality issues (hallucinations).
+  - type: input
+    id: project-id
+    attributes:
+      label: Project ID
+      placeholder: e.g., #1
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the Issue
+      placeholder: What went wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: expected-output
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    id: actual-output
+    attributes:
+      label: Actual AI Output
+      description: Include the specific hallucination or error message.
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical (System Failure)
+        - High (Frequent Hallucination)
+        - Medium (Edge Case Issue)
+        - Low (UX Improvement)
+    validations:
+      required: true

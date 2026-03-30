@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🤝 AI Project Collaboration
+    url: https://github.com/pyhrishi
+    about: Interest in collaborative AI project builds.
+  - name: 💬 General AI Discussion
+    url: https://github.com/pyhrishi/ai-product-lab/discussions
+    about: Discussing AI product management and strategy.
