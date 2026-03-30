@@ -1,63 +1,57 @@
-# Decision Log
+# 🏗️ Architectural Decision Records (ADR)
 
-> PMs are judged by decisions, not outputs. Use this log to track the "why" behind every major choice in your projects.
+> **"Architecture is about the important stuff. Whatever that is."** — Ralph Johnson.
+> This repository uses ADRs to document the "Why" behind every major technical and product choice.
 
-## Format
+## ADR Index
 
-### Project: [Project Name]
-### Date: [YYYY-MM-DD]
-### Decision: [What choice did I make?]
-
-### Context:
-Why was this decision needed?
-
-### Options Considered:
-1. [Option 1]
-2. [Option 2]
-3. [Option 3]
-
-### Chosen Approach:
-What I picked.
-
-### Why:
-Reasoning (technical, user needs, trade-offs).
-
-### Tradeoffs:
-What I accepted as downsides.
-
-### Outcome:
-Did it work? (Updated after implementation)
-
-### Reflection:
-Would I change this later?
+| ID | Title | Date | Status |
+| -- | ----- | ---- | ------ |
+| 001 | [Use Supabase Vector (pgvector) for Retrieval](#adr-001-use-supabase-vector-pgvector-for-retrieval) | 2026-03-30 | ✅ Accepted |
 
 ---
 
-## Decisions
+## ADR 001: Use Supabase Vector (pgvector) for Retrieval
 
-### Project: ai-knowledge-os
-### Date: 2026-03-30
-### Decision: Use Supabase Vector instead of Pinecone
+### Status
+Accepted (2026-03-30)
 
-**Context:**
-Need a scalable, easy-to-manage vector database for the AI Knowledge OS.
+### Context
+The AI Knowledge OS and other Tier 1 projects require a reliable, scalable vector database for semantic search and RAG retrieval. We need a solution that balances performance with architectural simplicity.
 
-**Options Considered:**
-1. Pinecone (Serverless) - Best for large scale, but standalone.
-2. Supabase Vector (pgvector) - Integrated with existing database.
-3. Weaviate - High performance, but more complex setup.
+### Options Considered
+*   **Pinecone**: Specialized vector database. High performance but introduces a new vendor and separate billing/auth.
+*   **Supabase (pgvector)**: Integrated with PostgreSQL. Allows relational + vector queries in one database.
+*   **Weaviate**: Open-source, high-performance, but higher ops overhead for a solo lab.
 
-**Chosen Approach:**
-Supabase Vector (pgvector)
+### Decision
+We will use **Supabase (pgvector)**.
 
-**Why:**
-Already using Supabase for auth and relational data. Integrated vector search reduces architectural complexity and allows for complex relational + semantic queries in one go.
+### Rationale
+- **Architectural Simplification**: By keeping relational data and vector embeddings in the same database, we avoid complex synchronization logic between disjoint systems.
+- **Cost/Ops Efficiency**: Leveraging our existing Supabase instance reduces cognitive load and operational overhead.
+- **Query Flexibility**: We can perform "Hybrid Search" (filtering by user meta-data AND semantic content) in a single SQL query.
 
-**Tradeoffs:**
-Slightly less optimized for massive-scale vector search compared to specialized engines like Pinecone, but more than sufficient for personal/enterprise knowledge bases.
+### Consequences
+*   **Positive**: Faster development cycle; simplified authentication and row-level security (RLS).
+*   **Negative**: We are tied to the PostgreSQL ecosystem for vector operations.
+*   **Neutral**: Performance is slightly lower than Pinecone at "million-scale," which is acceptable for these project tiers.
 
-**Outcome:**
-Successfully implemented; simplified data model significantly.
+---
 
-**Reflection:**
-Correct choice for MVP/V1. Integration speed outweighed specialized performance.
+## [NEW] ADR Template
+
+### Status
+(Proposed / Accepted / Deprecated)
+
+### Context
+What is the issue that we're seeing?
+
+### Decision
+What is the change that we're proposing and/or making?
+
+### Rationale
+Why is this the best choice?
+
+### Consequences
+What becomes easier or more difficult to do and any risks introduced?
