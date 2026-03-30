@@ -31,6 +31,18 @@ To build 100 professional-grade AI projects while documenting every technical de
 
 ---
 
+## 🧪 Skills & Capabilities Index
+*Navigate projects by technical pattern and product competency:*
+
+| Skill | Key Projects | Pattern |
+| :--- | :--- | :--- |
+| **RAG Expert** | [ai-knowledge-os](projects/tier-1/ai-knowledge-os/), [enterprise-search](projects/PROJECT_MATRIX.md#L49) | Hybrid Search, pgvector |
+| **Agentic Systems** | [multi-agent-orchestrator](projects/tier-1/multi-agent-orchestrator/), [research-agent](projects/PROJECT_MATRIX.md#L42) | LangGraph, Tool Use |
+| **Eval Rigor** | [llm-evaluation-platform](projects/tier-1/llm-evaluation-platform/), [retrieval-eval-suite](projects/PROJECT_MATRIX.md#L29) | LLM-as-a-Judge |
+| **Product Strategy** | [ai-product-playbook](projects/PROJECT_MATRIX.md#L109), [ai-prd-system](projects/PROJECT_MATRIX.md#L110) | Frameworks, Strategy |
+
+---
+
 ## 🛠️ Tech Stack & Patterns
 **Core Patterns**: RAG (Semantic/Hybrid), Agentic Orchestration, Memory Systems, Evaluation Loops.
 **Stack**: LangChain / LangGraph, Supabase (pgvector), Vercel, Python, Next.js.
