@@ -58,9 +58,21 @@ Step-by-step:
 * APIs used
 * Latency considerations
 
-### System Diagram
-![System Architecture Diagram](link-to-diagram-image)
-*(Use Excalidraw / Whimsical / Mermaid)*
+### System Architecture (Mermaid.js)
+
+```mermaid
+graph TD
+    User["👤 User"] --> Query["📥 Query Input"]
+    subgraph "🧠 AI Knowledge OS: RAG Pipeline"
+        Query --> Embedding["⚙️ Embedding (OpenAI)"]
+        Embedding --> Retrieval["🔍 Semantic Search (pgvector)"]
+        Retrieval --> Augmentation["🏗️ Augmentation (Prompt)"]
+        Augmentation --> Generation["💬 Generation (GPT-4o)"]
+        Generation --> Feedback["🔄 Accuracy Loop"]
+        Feedback --> Augmentation
+    end
+    Generation --> Output["📤 Knowledge Output"]
+```
 
 ---
 

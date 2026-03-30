@@ -58,9 +58,22 @@ Step-by-step:
 * APIs used
 * Latency considerations
 
-### System Diagram
-![System Architecture Diagram](link-to-diagram-image)
-*(Use Excalidraw / Whimsical / Mermaid)*
+### System Architecture (Mermaid.js)
+
+```mermaid
+graph TD
+    User["👤 User"] --> Input["📥 Input Layer"]
+    subgraph "🧠 AI Product Lab: System Core"
+        Input --> Processing["⚙️ Processing Layer (LLM/RAG/Agents)"]
+        Processing --> Memory["💾 Memory / Vector DB"]
+        Memory --> Processing
+    end
+    Processing --> Output["📤 Output Layer"]
+    Output --> Feedback["🔄 Feedback Loop"]
+    Feedback --> Processing
+```
+
+*(Edit the Mermaid flowchart above to match your specific project architecture)*
 
 ---
 
