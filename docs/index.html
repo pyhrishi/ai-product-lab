@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Product Lab | 100 Days of Ship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --emerald: #10b981;
+            --cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #334155;
+            --tier1: #10b981;
+            --tier2: #3b82f6;
+            --tier3: #6366f1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 1rem;
+            border: 1px solid var(--accent);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--emerald); }
+        .subtitle { color: var(--text-dim); font-size: 1.1rem; }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-value { display: block; font-size: 1.5rem; font-weight: 700; color: var(--cyan); }
+        .stat-label { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            border: 1px solid var(--accent);
+            align-items: center;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--accent);
+            background: var(--bg-dark);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .filter-group { display: flex; gap: 0.5rem; }
+        button.btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--accent);
+            background: var(--bg-dark);
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        button.btn.active {
+            background: var(--emerald);
+            color: white;
+            border-color: var(--emerald);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--accent);
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { 
+            transform: translateY(-4px); 
+            border-color: var(--emerald);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .tier-badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .t1 { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid #10b981; }
+        .t2 { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid #3b82f6; }
+        .t3 { background: rgba(99, 102, 241, 0.1); color: #6366f1; border: 1px solid #6366f1; }
+
+        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card-pattern { color: var(--cyan); font-size: 0.9rem; margin-bottom: 1rem; display: block; font-weight: 600; }
+        .card-problem { color: var(--text-dim); font-size: 0.95rem; flex-grow: 1; margin-bottom: 1.5rem; }
+
+        .card-footer {
+            border-top: 1px solid var(--accent);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-stack { font-size: 0.8rem; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+        .view-link { color: var(--emerald); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .view-link:hover { text-decoration: underline; }
+
+        #no-results { text-align: center; padding: 4rem; color: var(--text-dim); width: 100%; display: none; }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .controls { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 AI Product Lab</h1>
+            <p class="subtitle">100 Days of Ship Portfolio | Repository of Intelligence</p>
+            <div class="stats">
+                <div class="stat-item"><span class="stat-value">100</span><span class="stat-label">Total Projects</span></div>
+                <div class="stat-item"><span class="stat-value" id="active-count">0</span><span class="stat-label">Filtered</span></div>
+                <div class="stat-item"><span class="stat-value">5</span><span class="stat-label">Flagships</span></div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <input type="text" id="search" placeholder="Search by name, pattern, or problem...">
+            <div class="filter-group" id="tier-filters">
+                <button class="btn active" data-tier="all">All</button>
+                <button class="btn" data-tier="1">Tier 1</button>
+                <button class="btn" data-tier="2">Tier 2</button>
+                <button class="btn" data-tier="3">Tier 3</button>
+            </div>
+        </div>
+
+        <div id="no-results">No projects found matching your criteria.</div>
+        <div class="grid" id="project-grid">
+            <!-- Projects injected via JS -->
+        </div>
+    </div>
+
+    <script>
+        let projects = [];
+        let currentTier = 'all';
+
+        async function loadProjects() {
+            try {
+                const response = await fetch('projects.json');
+                projects = await response.json();
+                renderProjects(projects);
+            } catch (error) {
+                console.error('Error loading projects:', error);
+            }
+        }
+
+        function renderProjects(data) {
+            const grid = document.getElementById('project-grid');
+            const noResults = document.getElementById('no-results');
+            const activeCount = document.getElementById('active-count');
+            
+            grid.innerHTML = '';
+            activeCount.textContent = data.length;
+
+            if (data.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            noResults.style.display = 'none';
+
+            data.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="tier-badge t${p.tier}">Tier ${p.tier}</span>
+                    </div>
+                    <h3 class="card-title">${p.name}</h3>
+                    <span class="card-pattern">🧱 ${p.pattern}</span>
+                    <p class="card-problem">${p.problem}</p>
+                    <div class="card-footer">
+                        <span class="card-stack">${p.stack}</span>
+                        ${p.tier == '1' ? `<a href="../projects/tier-1/${p.name}/" class="view-link">View PRD →</a>` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filter() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            
+            const filtered = projects.filter(p => {
+                const matchesTier = currentTier === 'all' || p.tier == currentTier;
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm) || 
+                                     p.pattern.toLowerCase().includes(searchTerm) ||
+                                     p.problem.toLowerCase().includes(searchTerm);
+                return matchesTier && matchesSearch;
+            });
+            
+            renderProjects(filtered);
+        }
+
+        // Event Listeners
+        document.getElementById('search').addEventListener('input', filter);
+        
+        document.getElementById('tier-filters').addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                document.querySelectorAll('#tier-filters .btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentTier = e.target.dataset.tier;
+                filter();
+            }
+        });
+
+        loadProjects();
+    </script>
+</body>
+</html>
